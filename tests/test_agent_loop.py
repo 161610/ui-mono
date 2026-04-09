@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from typing import Any
 
-from py_pi_agent.agent_loop import AgentLoop
-from py_pi_agent.types import AgentResponse, ToolCall
-from py_pi_agent.session.store import SessionStore
-from py_pi_agent.app import build_registry
+from ui_mono.agent_loop import AgentLoop
+from ui_mono.types import AgentResponse, ToolCall
+from ui_mono.session.store import SessionStore
+from ui_mono.app import build_registry
 
 
 class FakeModel:

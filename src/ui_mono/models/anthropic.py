@@ -4,10 +4,10 @@ from typing import Any
 
 from anthropic import Anthropic
 
-from py_pi_agent.config import get_anthropic_client_kwargs
-from py_pi_agent.context.prompt_builder import SYSTEM_PROMPT
-from py_pi_agent.types import AgentResponse, ToolCall
-from py_pi_agent.models.base import ModelClient
+from ui_mono.config import get_anthropic_client_kwargs
+from ui_mono.context.prompt_builder import SYSTEM_PROMPT
+from ui_mono.types import AgentResponse, ToolCall
+from ui_mono.models.base import ModelClient
 
 
 class AnthropicModelClient(ModelClient):

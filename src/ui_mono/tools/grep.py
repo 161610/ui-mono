@@ -4,7 +4,7 @@ import re
 from pathlib import Path
 from typing import Any
 
-from py_pi_agent.tools_base import resolve_path
+from ui_mono.tools_base import resolve_path
 
 
 class GrepTool:

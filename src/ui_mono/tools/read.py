@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from py_pi_agent.tools_base import resolve_path
+from ui_mono.tools_base import resolve_path
 
 
 class ReadTool:

@@ -3,13 +3,13 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from py_pi_agent.context.prompt_builder import build_messages
-from py_pi_agent.context.truncation import truncate_history
-from py_pi_agent.models.base import ModelClient
-from py_pi_agent.session.schema import sanitize_value
-from py_pi_agent.session.store import SessionStore
-from py_pi_agent.session.summary import build_summary
-from py_pi_agent.tools_base import ToolRegistry
+from ui_mono.context.prompt_builder import build_messages
+from ui_mono.context.truncation import truncate_history
+from ui_mono.models.base import ModelClient
+from ui_mono.session.schema import sanitize_value
+from ui_mono.session.store import SessionStore
+from ui_mono.session.summary import build_summary
+from ui_mono.tools_base import ToolRegistry
 
 
 class AgentLoop:

@@ -4,15 +4,15 @@ from pathlib import Path
 
 import typer
 
-from py_pi_agent.agent_loop import AgentLoop
-from py_pi_agent.app import build_registry
-from py_pi_agent.config import (
+from ui_mono.agent_loop import AgentLoop
+from ui_mono.app import build_registry
+from ui_mono.config import (
     get_sessions_dir,
     has_anthropic_credentials,
     load_env,
 )
-from py_pi_agent.models.anthropic import AnthropicModelClient
-from py_pi_agent.session.store import SessionStore
+from ui_mono.models.anthropic import AnthropicModelClient
+from ui_mono.session.store import SessionStore
 
 app = typer.Typer(add_completion=False)
 

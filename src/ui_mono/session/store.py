@@ -5,7 +5,7 @@ import uuid
 from pathlib import Path
 from typing import Any
 
-from py_pi_agent.session.schema import StoredEvent
+from ui_mono.session.schema import StoredEvent
 
 
 class SessionStore:

@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "py-pi-agent"
+name = "ui-mono"
 version = "0.1.0"
 description = "Python coding agent MVP inspired by pi-mono"
 readme = "README.md"
@@ -20,7 +20,7 @@ dev = [
 ]
 
 [project.scripts]
-py-pi-agent = "py_pi_agent.cli:app"
+ui-mono = "ui_mono.cli:app"
 
 [tool.setuptools.package-dir]
 "" = "src"
@@ -30,3 +30,4 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]

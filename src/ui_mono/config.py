@@ -54,7 +54,7 @@ def has_anthropic_credentials() -> bool:
 
 
 def get_agent_home() -> Path:
-    return Path.home() / ".py-pi-agent"
+    return Path.home() / ".ui-mono"
 
 
 def get_sessions_dir() -> Path:

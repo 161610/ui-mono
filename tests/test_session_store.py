@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from py_pi_agent.session.store import SessionStore
+from ui_mono.session.store import SessionStore
 
 
 def test_session_store_create_append_and_load(tmp_path: Path) -> None:

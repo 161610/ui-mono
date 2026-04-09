@@ -5,13 +5,13 @@ from pathlib import Path
 
 import pytest
 
-from py_pi_agent.tools.bash import BashTool
-from py_pi_agent.tools.edit import EditTool
-from py_pi_agent.tools.find import FindTool
-from py_pi_agent.tools.grep import GrepTool
-from py_pi_agent.tools.ls import LsTool
-from py_pi_agent.tools.read import ReadTool
-from py_pi_agent.tools.write import WriteTool
+from ui_mono.tools.bash import BashTool
+from ui_mono.tools.edit import EditTool
+from ui_mono.tools.find import FindTool
+from ui_mono.tools.grep import GrepTool
+from ui_mono.tools.ls import LsTool
+from ui_mono.tools.read import ReadTool
+from ui_mono.tools.write import WriteTool
 
 
 def test_read_write_edit_tools(tmp_path: Path) -> None:
