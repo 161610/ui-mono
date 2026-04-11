@@ -50,3 +50,20 @@ def test_agent_loop_sanitizes_surrogate_input_before_model_call(tmp_path) -> Non
 
     assert reply == "请�读取 README"
     assert history[0] == {"role": "user", "content": "请�读取 README"}
+
+
+def test_agent_loop_triggers_compaction_and_branch_messages(tmp_path) -> None:
+    store = SessionStore(tmp_path / "sessions")
+    session_path = store.create(parent_id="root-session", branch_label="experiment")
+    registry = build_registry(tmp_path)
+    loop = AgentLoop(EchoModel(), registry, store)
+
+    history = [{"role": "user", "content": f"m{i}"} for i in range(10)]
+    reply, next_history, summary = loop.run_turn(session_path, history, "latest")
+
+    assert reply == "latest"
+    assert summary is not None
+    assert len(next_history) <= 8
+    events = store.read_events(session_path)
+    assert any(event.type == "compaction" for event in events)
+    assert any(event.type == "message" for event in events)

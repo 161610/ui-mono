@@ -4,7 +4,15 @@ from dataclasses import dataclass
 from typing import Any, Literal
 
 Role = Literal["system", "user", "assistant", "tool"]
-EventType = Literal["session", "message", "tool_call", "tool_result", "summary"]
+EventType = Literal[
+    "session",
+    "message",
+    "tool_call",
+    "tool_result",
+    "summary",
+    "branch",
+    "compaction",
+]
 
 
 @dataclass

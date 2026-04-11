@@ -35,3 +35,18 @@ class StoredEvent:
     def from_json(cls, line: str) -> "StoredEvent":
         data = json.loads(line)
         return cls(type=data["type"], payload=data["payload"])
+
+
+@dataclass
+class SessionHeader:
+    id: str
+    parent_id: str | None = None
+    branch_label: str | None = None
+
+
+@dataclass
+class SessionSnapshot:
+    header: SessionHeader
+    history: list[dict[str, Any]]
+    summary: str | None = None
+    compaction: dict[str, Any] | None = None

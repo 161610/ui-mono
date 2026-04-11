@@ -33,7 +33,9 @@ def chat(
     if session_path is None:
         session_path = session_store.create()
 
-    history, summary = session_store.load_history(session_path)
+    snapshot = session_store.load_snapshot(session_path)
+    history = snapshot.history
+    summary = snapshot.summary
     registry = build_registry(working_dir)
     model_client = AnthropicModelClient(model=model)
     agent_loop = AgentLoop(model_client, registry, session_store)
@@ -45,6 +47,16 @@ def chat(
         user_input = typer.prompt("you")
         if user_input.strip() == "/quit":
             break
+        if user_input.startswith("/branch "):
+            branch_label = user_input.removeprefix("/branch ").strip()
+            if not branch_label:
+                raise typer.BadParameter("branch label is required")
+            session_path = session_store.fork(session_path, branch_label)
+            snapshot = session_store.load_snapshot(session_path)
+            history = snapshot.history
+            summary = snapshot.summary
+            typer.echo(f"branched: {session_path}")
+            continue
         reply, history, summary = agent_loop.run_turn(session_path, history, user_input, summary)
         if reply:
             typer.echo(f"assistant> {reply}")

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from ui_mono.runtime.agent_session import AgentSessionRuntime
 from ui_mono.tools.bash import BashTool
 from ui_mono.tools.edit import EditTool
 from ui_mono.tools.find import FindTool
@@ -22,3 +23,7 @@ def build_registry(cwd: Path) -> ToolRegistry:
     registry.register(FindTool(cwd))
     registry.register(GrepTool(cwd))
     return registry
+
+
+def build_runtime(model_client, tool_registry: ToolRegistry, session_store) -> AgentSessionRuntime:
+    return AgentSessionRuntime(model_client, tool_registry, session_store)
