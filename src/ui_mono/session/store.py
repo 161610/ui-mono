@@ -24,8 +24,11 @@ class SessionStore:
         return path
 
     def latest(self) -> Path | None:
-        files = sorted(self.sessions_dir.glob("*.jsonl"), key=lambda p: p.stat().st_mtime, reverse=True)
+        files = self.list_paths()
         return files[0] if files else None
+
+    def list_paths(self) -> list[Path]:
+        return sorted(self.sessions_dir.glob("*.jsonl"), key=lambda p: p.stat().st_mtime, reverse=True)
 
     def append(self, session_path: Path, event_type: str, payload: dict[str, Any]) -> None:
         with session_path.open("a", encoding="utf-8") as f:
@@ -62,6 +65,33 @@ class SessionStore:
         for event in events[1:]:
             if event.type == "message":
                 history.append(event.payload)
+            elif event.type == "tool_result":
+                history.append(
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "tool_result",
+                                "tool_use_id": event.payload["id"],
+                                "content": event.payload.get("content", ""),
+                            }
+                        ],
+                    }
+                )
+            elif event.type == "tool_error":
+                history.append(
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "tool_result",
+                                "tool_use_id": event.payload["id"],
+                                "content": event.payload.get("error", ""),
+                                "is_error": True,
+                            }
+                        ],
+                    }
+                )
             elif event.type == "summary":
                 summary = event.payload.get("content")
             elif event.type == "compaction":
@@ -88,10 +118,7 @@ class SessionStore:
                 path=session_path,
             )
         for node in nodes.values():
-            if node.parent_id and node.parent_id in nodes:
-                nodes[node.parent_id].children.append(node)
-            elif tree.root is None:
-                tree.root = node
+            tree.attach(node)
         return tree
 
     def fork(self, session_path: Path, branch_label: str) -> Path:

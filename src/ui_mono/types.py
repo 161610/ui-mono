@@ -9,6 +9,7 @@ EventType = Literal[
     "message",
     "tool_call",
     "tool_result",
+    "tool_error",
     "summary",
     "branch",
     "compaction",
